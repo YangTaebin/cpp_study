@@ -26,7 +26,7 @@ int main() {
   address.sin_addr.s_addr = INADDR_ANY;
   if (bind(listen_fd, (struct sockaddr*)&address, sizeof(address)) == -1) {
     perror("Failed to bind at %lu:%hu",address.sin_addr.s_addr, address.sin_port);
-    exit(EXIT_FAILURE)
+    exit(EXIT_FAILURE);
   }
   printf("Binding to %u:%hu, Success",address.sin_addr.s_addr, address.sin_port);
 }
