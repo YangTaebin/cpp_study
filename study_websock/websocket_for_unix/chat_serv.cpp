@@ -6,7 +6,7 @@
 #include <string.h>
 #include <iostream>
 
-void child_process(concli) {
+void child_process(int concli) {
 
 }
 
