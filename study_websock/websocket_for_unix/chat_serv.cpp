@@ -7,7 +7,25 @@
 #include <iostream>
 
 void child_process(int concli) {
+  char buffer[1024];
+  char* data = 0x0;
+  int len = 0;
+  int s;
 
+  while ((s=recv(concli,buffer,1023,0))>0) {
+    buffer[s] = 0x0;
+    if (data == 0x0) {
+      data = strdup(buf);
+      len = s;
+    }
+    else {
+      data = (char*) realloc(data, len + s + 1) ;
+      strncpy(data + len, buf, s) ;
+      data[len + s] = 0x0 ;
+      len += s ;
+    }
+  }
+  printf("> %s\n", data);
 }
 
 int main() {
