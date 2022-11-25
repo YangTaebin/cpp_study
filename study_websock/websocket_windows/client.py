@@ -16,5 +16,5 @@ def connect_server(socket, address):
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 connect_server(s,(Host,port))
-s.sendall(b"Hello,world!\n")
+s.sendall(b"Hello, world!\n")
 s.close()
