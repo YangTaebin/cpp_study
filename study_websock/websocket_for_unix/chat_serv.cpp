@@ -7,7 +7,7 @@
 #include <iostream>
 
 int main() {
-  int listen_fd, socket;
+  int listen_fd;
   struct sockaddr_in address;
   int addrlen = sizeof(address);
 
