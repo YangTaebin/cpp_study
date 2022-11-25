@@ -6,6 +6,10 @@
 #include <string.h>
 #include <iostream>
 
+void child_process(concli) {
+
+}
+
 int main() {
   int listen_fd;
   struct sockaddr_in address;
@@ -18,7 +22,6 @@ int main() {
     perror("Creat socket failed...");
     exit(EXIT_FAILURE);
   }
-  std::cout << addrlen << std::endl;
   memset(&address, '0', sizeof(address));
 
   address.sin_family = AF_INET;
@@ -28,5 +31,20 @@ int main() {
     perror("Failed for binding");
     exit(EXIT_FAILURE);
   }
-  printf("Binding to %u:%hu, Success",address.sin_addr.s_addr, address.sin_port);
+  printf("Binding to %u:%hu, Success\n",address.sin_addr.s_addr, address.sin_port);
+
+  while (1) {
+    if (listen(listen_fd, 16) == -1) {
+      perror("Failed to listen...");
+      exit(EXIT_FAILURE);
+    }
+
+    accept_connection = accept(listen_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
+    if (new_socket == -1) {
+      perror("Failed to accept connection...");
+      exit(EXIT_FAILURE);
+    }
+
+    child_process(new_socket);
+  }
 }
