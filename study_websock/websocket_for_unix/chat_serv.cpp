@@ -11,7 +11,7 @@ void child_process(concli) {
 }
 
 int main() {
-  int listen_fd;
+  int listen_fd, accept_connection;
   struct sockaddr_in address;
   int addrlen = sizeof(address);
 
@@ -40,7 +40,7 @@ int main() {
     }
 
     accept_connection = accept(listen_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
-    if (new_socket == -1) {
+    if (accept_connection == -1) {
       perror("Failed to accept connection...");
       exit(EXIT_FAILURE);
     }
