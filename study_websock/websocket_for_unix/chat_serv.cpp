@@ -11,7 +11,7 @@ int main() {
   struct sockaddr_in address;
   int addrlen = sizeof(address);
 
-  char text buffer[1024] = {0};
+  char buffer[1024] = {0};
 
   listen_fd = socket(AF_INET, SOCK_STREAM, 0);
   if (listen_fd == 0) {
@@ -28,5 +28,5 @@ int main() {
     perror("Failed to bind at %lu:%hu",address.sin_addr.s_addr, address.sin_port);
     exit(EXIT_FAILURE)
   }
-  printf("Binding to %lu:%hu, Success",address.sin_addr.s_addr, address.sin_port);
+  printf("Binding to %u:%hu, Success",address.sin_addr.s_addr, address.sin_port);
 }
