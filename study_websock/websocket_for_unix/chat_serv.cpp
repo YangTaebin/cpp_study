@@ -45,6 +45,6 @@ int main() {
       exit(EXIT_FAILURE);
     }
 
-    child_process(new_socket);
+    child_process(accept_connection);
   }
 }
