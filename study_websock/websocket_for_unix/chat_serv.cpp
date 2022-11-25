@@ -33,8 +33,6 @@ int main() {
   struct sockaddr_in address;
   int addrlen = sizeof(address);
 
-  char buffer[1024] = {0};
-
   listen_fd = socket(AF_INET, SOCK_STREAM, 0);
   if (listen_fd == 0) {
     perror("Creat socket failed...");
