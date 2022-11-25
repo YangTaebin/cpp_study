@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <netinet/in.h>
 #include <string.h>
+#include <iostream>
 
 int main() {
   int listen_fd, socket;
@@ -25,7 +26,7 @@ int main() {
   address.sin_port = htons(8000);
   address.sin_addr.s_addr = INADDR_ANY;
   if (bind(listen_fd, (struct sockaddr*)&address, sizeof(address)) == -1) {
-    perror("Failed to bind at %lu:%hu",address.sin_addr.s_addr, address.sin_port);
+    perror("Failed for binding");
     exit(EXIT_FAILURE);
   }
   printf("Binding to %u:%hu, Success",address.sin_addr.s_addr, address.sin_port);
