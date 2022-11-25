@@ -15,12 +15,12 @@ void child_process(int concli) {
   while ((s=recv(concli,buffer,1023,0))>0) {
     buffer[s] = 0x0;
     if (data == 0x0) {
-      data = strdup(buf);
+      data = strdup(buffer);
       len = s;
     }
     else {
       data = (char*) realloc(data, len + s + 1) ;
-      strncpy(data + len, buf, s) ;
+      strncpy(data + len, buffer, s) ;
       data[len + s] = 0x0 ;
       len += s ;
     }
