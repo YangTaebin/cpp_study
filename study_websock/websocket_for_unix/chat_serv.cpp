@@ -25,8 +25,8 @@ int main() {
   memset(&address, '0', sizeof(address));
 
   address.sin_family = AF_INET;
-  address.sin_port = htons(8000);
   address.sin_addr.s_addr = INADDR_ANY;
+  address.sin_port = htons(8000);
   if (bind(listen_fd, (struct sockaddr*)&address, sizeof(address)) == -1) {
     perror("Failed for binding");
     exit(EXIT_FAILURE);
