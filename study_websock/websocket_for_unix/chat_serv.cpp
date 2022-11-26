@@ -69,13 +69,13 @@ int main() {
   printf("Binding to %u:%hu, Success\n",address.sin_addr.s_addr, address.sin_port);
 
   while (1) {
-    std::cout << socket_connection << std::endl;
     std::cout << max_connection_process << std::endl;
     socket_connection += 1;
     if (listen(listen_fd, 16) == -1) {
       perror("Failed to listen...");
       exit(EXIT_FAILURE);
     }
+    std::cout << socket_connection << std::endl;
     if (max_connection_process >= 0){
       accept_connection = accept(listen_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
       if (accept_connection == -1) {
