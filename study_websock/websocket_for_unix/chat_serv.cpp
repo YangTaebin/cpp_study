@@ -70,6 +70,7 @@ int main() {
       perror("Failed to listen...");
       exit(EXIT_FAILURE);
     }
+    std::cout << max_connection_process << std::endl;
     if (max_connection_process >= 0){
       accept_connection = accept(listen_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
       if (accept_connection == -1) {
