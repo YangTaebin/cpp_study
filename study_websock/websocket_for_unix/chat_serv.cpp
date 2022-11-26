@@ -30,6 +30,7 @@ void child_process(int concli) {
     }
   }
   printf("> %s\n", data);
+  shutdown(conn, SHUT_WR) ;
 }
 
 void sigchld_handler(int sig) {
