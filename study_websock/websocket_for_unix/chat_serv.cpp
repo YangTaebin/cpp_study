@@ -30,12 +30,13 @@ void child_process(int concli) {
     }
   }
   printf("> %s\n", data);
-  shutdown(concli, SHUT_WR) ;
+  close(concli);
 }
 
 void sigchld_handler(int sig) {
-  while (waitpid(-1, NULL, WNOHANG) > 0);
-  max_connection_process += 1;
+  while (waitpid(-1, NULL, WNOHANG) > 0){
+    max_connection_process += 1;
+  }
 }
 
 int main() {
@@ -49,8 +50,6 @@ int main() {
   int listen_fd, accept_connection;
   struct sockaddr_in address;
   int addrlen = sizeof(address);
-
-  int socket_connection = 0;
 
   listen_fd = socket(AF_INET, SOCK_STREAM, 0);
   if (listen_fd == 0) {
@@ -69,7 +68,6 @@ int main() {
   printf("Binding to %u:%hu, Success\n",address.sin_addr.s_addr, address.sin_port);
 
   while (1) {
-    socket_connection += 1;
     if (listen(listen_fd, 16) == -1) {
       perror("Failed to listen...");
       exit(EXIT_FAILURE);
@@ -81,6 +79,7 @@ int main() {
       exit(EXIT_FAILURE);
     }
 
+    max_connection_process -= 1;
     std::cout << max_connection_process << std::endl;
 
     if(fork() == 0){
@@ -88,7 +87,6 @@ int main() {
       exit(0);
     }
     else{
-      max_connection_process -= 1;
       close(accept_connection);
     }
   }
