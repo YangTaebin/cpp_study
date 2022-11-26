@@ -50,6 +50,8 @@ int main() {
   struct sockaddr_in address;
   int addrlen = sizeof(address);
 
+  int socket_connection = 0;
+
   listen_fd = socket(AF_INET, SOCK_STREAM, 0);
   if (listen_fd == 0) {
     perror("Creat socket failed...");
@@ -67,8 +69,9 @@ int main() {
   printf("Binding to %u:%hu, Success\n",address.sin_addr.s_addr, address.sin_port);
 
   while (1) {
-    std::cout << getpid() << std::endl;
-    std::cout << max_connection_process << std::endl << std::endl;
+    std::cout << socket_connection << std::endl;
+    std::cout << max_connection_process << std::endl;
+    socket_connection += 1;
     if (listen(listen_fd, 16) == -1) {
       perror("Failed to listen...");
       exit(EXIT_FAILURE);
