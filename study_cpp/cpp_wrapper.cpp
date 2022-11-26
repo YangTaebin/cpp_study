@@ -8,6 +8,6 @@ int main(){
   int a, b;
   a = 1;
   b = 2;
-  A a = A(a,b);
+  A a(a,b);
   std::cout << a.c + " " + a.d << std::endl;
 }
