@@ -35,10 +35,7 @@ void child_process(int concli) {
 }
 
 void sigchld_handler(int sig) {
-  while (waitpid(-1, NULL, WNOHANG) > 0){
-    max_connection_process += 1;
-    std::cout << max_connection_process << std::endl;
-  }
+  max_connection_process += 1;
 }
 
 int main() {
@@ -46,7 +43,6 @@ int main() {
   sa.sa_handler = sigchld_handler;
   sa.sa_flags = SA_NODEFER | SA_NOCLDWAIT;
   sigemptyset(&sa.sa_mask);
-  sa.sa_restorer = NULL;
   sigaction(SIGCHLD, &sa, NULL);
 
   int listen_fd, accept_connection;
