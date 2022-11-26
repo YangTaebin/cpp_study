@@ -36,6 +36,7 @@ void child_process(int concli) {
 
 void sigchld_handler(int sig) {
   max_connection_process += 1;
+  std::cout << max_connection_process << std::endl;
 }
 
 int main() {
