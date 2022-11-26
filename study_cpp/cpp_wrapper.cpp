@@ -9,5 +9,6 @@ int main(){
   a = 1;
   b = 2;
   A a_object(a,b);
-  std::cout << a_object.c + " " + a_object.d << std::endl;
+  std::cout << a_object.c << std::endl;
+  std::cout << a_object.d << std::endl;
 }
