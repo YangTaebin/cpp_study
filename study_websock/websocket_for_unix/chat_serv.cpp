@@ -83,8 +83,8 @@ int main() {
         exit(0);
       }
       else{
-        close(accept_connection);
         max_connection_process -= 1;
+        close(accept_connection);
       }
     }
   }
