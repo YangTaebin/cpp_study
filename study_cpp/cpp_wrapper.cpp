@@ -2,7 +2,7 @@
 class A{
 public:
   int c, d;
-  A(int a, int b) : c(a+b) d(a-b){};
+  A(int a, int b) : c(a+b), d(a-b){};
 };
 int main(){
   int a, b = 1, 2;
