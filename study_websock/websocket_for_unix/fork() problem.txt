@@ -1,0 +1,2 @@
+1. 왜 나머지 4개의 client socket은 자식을 만들고 accept도 안하고 연결이 되었는가
+2. 왜 child에서 exit(0)를 했는데 parent의 accept에 문제가 발생하였는가
