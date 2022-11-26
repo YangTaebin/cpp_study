@@ -68,7 +68,7 @@ int main() {
 
   while (1) {
     std::cout << getpid() << std::endl;
-    std::cout << max_connection_process << std::endl;
+    std::cout << max_connection_process << std::endl << std::endl;
     if (listen(listen_fd, 16) == -1) {
       perror("Failed to listen...");
       exit(EXIT_FAILURE);
