@@ -75,12 +75,14 @@ int main() {
       exit(EXIT_FAILURE);
     }
 
-    std::cout << max_connection_process << std::endl;
     accept_connection = accept(listen_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
     if (accept_connection == -1) {
       perror("Failed to accept connection...");
       exit(EXIT_FAILURE);
     }
+
+    std::cout << max_connection_process << std::endl;
+
     if(fork() == 0){
       child_process(accept_connection);
       exit(0);
