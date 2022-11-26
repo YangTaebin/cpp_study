@@ -81,6 +81,7 @@ int main() {
       }
       if(fork() == 0){
         child_process(accept_connection);
+        exit(0);
       }
       else{
         max_connection_process -= 1;
