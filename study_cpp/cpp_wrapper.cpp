@@ -8,6 +8,6 @@ int main(){
   int a, b;
   a = 1;
   b = 2;
-  A a(a,b);
-  std::cout << a.c + " " + a.d << std::endl;
+  A a_object(a,b);
+  std::cout << a_object.c + " " + a_object.d << std::endl;
 }
