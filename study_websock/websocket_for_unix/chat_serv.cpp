@@ -31,6 +31,7 @@ void child_process(int concli) {
   }
   printf("> %s\n", data);
   close(concli);
+  exit(0);
 }
 
 void sigchld_handler(int sig) {
@@ -85,7 +86,6 @@ int main() {
 
     if(fork() == 0){
       child_process(accept_connection);
-      exit(0);
     }
     else{
       close(accept_connection);
