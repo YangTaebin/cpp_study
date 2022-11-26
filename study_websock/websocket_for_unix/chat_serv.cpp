@@ -5,6 +5,9 @@
 #include <netinet/in.h>
 #include <string.h>
 #include <iostream>
+#include <signal.h>
+
+int max_connection_process = 10;
 
 void child_process(int concli) {
   char buffer[1024];
@@ -28,7 +31,19 @@ void child_process(int concli) {
   printf("> %s\n", data);
 }
 
+void sigchld_handler(int sig) {
+  while (waitpid(-1, NULL, WNOHANG) > 0);
+  max_connection_process += 1;
+}
+
 int main() {
+  struct sigaction sa;
+  sa.sa_handler = sigchld_handler;
+  sa.sa_flags = SA_NODEFER | SA_NOCLDWAIT;
+  sigemptyset(&sa.sa_mask);
+  sa.sa_restorer = NULL;
+  sigaction(SIGCHLD, &sa, NULL);
+
   int listen_fd, accept_connection;
   struct sockaddr_in address;
   int addrlen = sizeof(address);
@@ -54,13 +69,20 @@ int main() {
       perror("Failed to listen...");
       exit(EXIT_FAILURE);
     }
-
-    accept_connection = accept(listen_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
-    if (accept_connection == -1) {
-      perror("Failed to accept connection...");
-      exit(EXIT_FAILURE);
+    if (max_connection_process >= 0){
+      accept_connection = accept(listen_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
+      if (accept_connection == -1) {
+        perror("Failed to accept connection...");
+        exit(EXIT_FAILURE);
+      }
+      if(fork() == 0){
+        child_process(accept_connection);
+        exit(0);
+      }
+      else{
+        close(accept_connection);
+        max_connection_process -= 1;
+      }
     }
-
-    child_process(accept_connection);
   }
 }

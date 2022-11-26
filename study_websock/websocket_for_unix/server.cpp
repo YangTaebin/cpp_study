@@ -10,7 +10,7 @@ void child_proc(int conn){
   char * data = 0x0 ;
   int len = 0 ;
   int s ;
-  
+
   while ( (s = recv(conn, buf, 1023, 0)) > 0 ) {
     buf[s] = 0x0 ;
     if (data == 0x0) {
