@@ -1,0 +1,6 @@
+F=G*M*m/r^2 = m*v^2/r
+v = root(GM/r)
+
+T=2*pi*r/v = 2*pi*root(r^3/GM)
+
+mv
